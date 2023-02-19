@@ -1,11 +1,11 @@
 import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
-import axios from 'axios';
 
-import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "components/Appointment/index";
 import { getAppointmentsForDay, getInterview } from '../helpers/selectors';
+import "components/Application.scss";
 
 
 
@@ -51,7 +51,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
   const setDay = day => setState({ ...state, day });
 
@@ -61,7 +62,7 @@ export default function Application(props) {
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then(all => {
-      const [days, appointments] = all;
+      const [days, appointments, interviewers] = all;
       setState(prev => ({ ...prev, days: days.data, appointments: appointments.data, interviewers: interviewers.data }));
     });
   }, []);
