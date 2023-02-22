@@ -6,8 +6,9 @@ import Button from "components/Button";
 
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
+  console.log("props of the students", props.student);
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-
+  console.log(props.interviewer);
   const reset = () => {
     setStudent("");
     setInterviewer(null);
@@ -33,6 +34,7 @@ export default function Form(props) {
             placeholder="Enter Student Name"
             value={student}
             onChange={(event) => setStudent(event.target.value)}
+          // If in edit mode, set default value to student prop
           />
         </form>
         <InterviewerList
