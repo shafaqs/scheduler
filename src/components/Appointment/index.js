@@ -39,7 +39,10 @@ export default function Appointment(props) {
   function destroy(event) {
     transition(DELETING, true);
     props.cancelInterview(props.id)
-      .then(() => transition(EMPTY))
+      .then(() => {
+        transition(EMPTY);
+        setConfirm(false); // Reset confirm state variable
+      })
       .catch(error => transition(ERROR_DELETE, true));
   }
 
