@@ -12,7 +12,7 @@ const state = {
       id: 2,
       name: "Tuesday",
       appointments: [4, 5],
-      interviewers: [1]
+      interviewers: [2]
     }
   ],
   appointments: {
