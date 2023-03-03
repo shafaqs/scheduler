@@ -15,7 +15,7 @@ Asynchronous display <img width="1512" alt="Delete-confirm" src="https://user-im
 
 ## Setup
 
-Install dependencies with `npm install` or yarn add
+Install dependencies with `npm install` 
 
 ## Running Webpack Development Server
 
@@ -23,8 +23,17 @@ Install dependencies with `npm install` or yarn add
 npm start
 ```
 
-## Running Jest Test Framework
+## Running storybook Test Framework
 
 ```sh
 npm test
 ```
+##API server & Database Setup
+
+For full functionality both must run concurrently: the client and the API server applications.
+
+Start by forking and cloning the scheduler-api server [here](https://github.com/shafaqs/scheduler-api)
+Follow the steps outlined in README to install and setup the database
+Fork and clone this repo
+Navigate to the root directory and install dependencies with npm install
+Once you have the database setup and the scheduler-api server running, run the following command from the root directory of the project npm start
