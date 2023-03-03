@@ -30,7 +30,7 @@ npm test
 ```
 ##API server & Database Setup
 
-For full functionality both must run concurrently: the client and the API server applications.
+For full functionality both must run simultaneousley: the client and the API server applications.
 
 Start by forking and cloning the scheduler-api server [here](https://github.com/shafaqs/scheduler-api)
 Follow the steps outlined in README to install and setup the database
