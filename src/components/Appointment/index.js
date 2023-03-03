@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.scss";
 import Header from "./Header";
 import Show from "./Show";
@@ -23,7 +23,6 @@ export default function Appointment(props) {
 
 
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
-  const [confirm, setConfirm] = useState(false);
 
   function save(name, interviewer) {
     const interview = {
@@ -36,18 +35,17 @@ export default function Appointment(props) {
       .catch(() => transition(ERROR_SAVE, true));
   };
 
-  function destroy(event) {
+  function destroy() {
     transition(DELETING, true);
     props.cancelInterview(props.id)
       .then(() => {
         transition(EMPTY);
-        setConfirm(false); // Reset confirm state variable
       })
       .catch(error => transition(ERROR_DELETE, true));
   }
 
   function confirmDelete() {
-    setConfirm(true);
+    transition(CONFIRM);
   }
 
   function editInterview() {
@@ -80,17 +78,13 @@ export default function Appointment(props) {
           onSave={save}
           student={props.interview.student}
           interviewer={props.interview.interviewer.id}
-          editMode={true} // Pass editMode prop as true
         />
       )}
-      {confirm && (
+      {mode === CONFIRM && (
         <Confirm
           message="Are you sure you want to delete this appointment?"
-          onCancel={() => {
-            setConfirm(false);
-          }}
+          onCancel={back}
           onConfirm={() => {
-            transition(CONFIRM);
             destroy();
           }}
           id={props.id}
@@ -101,7 +95,7 @@ export default function Appointment(props) {
         <Error message={"Could not save appointment."} onClose={() => back()} />
       )}
       {mode === ERROR_DELETE && (
-        <Error message={"Could not cancel appointment."} onClose={() => back()} />
+        <Error message={"Could not cancel appointment."} onClose={back} />
       )}
     </article>
   );
